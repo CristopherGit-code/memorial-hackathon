@@ -1,0 +1,5 @@
+oci_client:
+  configProfile: "DEFAULT"
+  compartiment:  ${COMPARTIMENT}
+  endpoint:  ${ENDPOINT}
+  config_path:  ${CONFIG_PATH}
