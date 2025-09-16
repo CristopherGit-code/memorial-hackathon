@@ -12,10 +12,6 @@ from typing import List,Any
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(name=f"DAILY_BUILDER.{__name__}")
 
-@tool
-def get_weather():
-    pass
-
 class DailyAgent:
     """ Agent in charge of helping the superintendent to build the daily report """
 

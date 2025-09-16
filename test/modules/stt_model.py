@@ -6,13 +6,9 @@ import oci
 from oci.object_storage import ObjectStorageClient
 import json,os,io,time 
 
-AIServiceSpeechClient.
-
-
 SANDBOX_CONFIG_FILE = "C:/.oci/config"
 FILE_TO_ANALYZE =r"C:\Users\Cristopher Hdz\Desktop\Test\hackathon\test\modules\voice_sample3.mp3"
 llm_service_endpoint= "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com"
-
  
 def load_config(config_path):
     """Load configuration from a JSON file."""
@@ -133,15 +129,11 @@ def retrieveTranscribedFile(oci_cfg, bucket_cfg, output_prefix):
         with open(filename,"w") as f:
             f.write(response.data.text)
         print (f"saved {filename}")
-
-        
     
 #read the config files 
 scfg = load_config(SANDBOX_CONFIG_FILE)
 oci_cfg = oci.config.from_file(SANDBOX_CONFIG_FILE,"API_USER")
 bucket_cfg = scfg["bucket"]
-
-
 
 upload(oci_cfg, bucket_cfg) 
 ai_client = getSpeechClient(oci_cfg)
