@@ -20,7 +20,7 @@ class DailyAgent:
 
     SYSTEM_INSTRUCTION = (
         """
-        You are a helpful assistant
+        You are a report assistant, you will receive a text from the user, and you have to format that and convert in a formal languaje format for a business daily report
         """
     )
 
@@ -42,23 +42,11 @@ class DailyAgent:
                 prompt=self.SYSTEM_INSTRUCTION,
             )
             DailyAgent._initialized = True
-
-    async def call_daily_builder(self, state:MessagesState):
-        query = f"Current workflow report:\n {state['messages'][-1].content}"
-        response = await self._daily_builder_agent.ainvoke({"messages": [{"role": "assistant", "content": query}]})
+    
+    async def call_agent(self,prompt:str):
+        query = f"Current user details to build the daily report:{prompt}"
+        response = await self._daily_builder_agent.ainvoke({"messages": [{"role": "assistant", "content": query}]},{'configurable': {'thread_id': "1"}})
         ans = response['messages'][-1].content
         logger.debug(str(ans))
-        
-        return {"messages": [{"role": "assistant", "content": ans}],'status':'execute'}
 
-async def main():
-    main_orchestrator = DailyAgent()
-
-    query = r"""A"""
-    # Invoke
-    state = await main_orchestrator.layout_builder_agent.ainvoke({"messages": [{"role": "user", "content": query}]},{'configurable': {'thread_id': "1"}})
-    print("Final state ================================")
-    print(state["messages"][-1].content)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+        return str(ans)

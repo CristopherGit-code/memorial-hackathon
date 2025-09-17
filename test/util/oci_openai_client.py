@@ -261,6 +261,8 @@ class OciOpenAILangGraphClient(ChatOpenAI):
 """ CUSTOM ADD-ON for langgraph agents """
 # region Custom lang agent
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class LLM_Open_Client:
     _instance = None
