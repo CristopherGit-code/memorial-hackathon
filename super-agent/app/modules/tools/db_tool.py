@@ -8,7 +8,14 @@ settings = Settings(r'C:\Users\Cristopher Hdz\Desktop\Test\hackathon\test\util\c
 db = DataBase(settings)
 
 @tool
-def get_daily_report_data():
+def get_daily_report_data(date_mm_dd_yyyy: str):
+    """ Function to retrieve the current daily information from DB"""
+    query = """ SELECT * FROM WORKER_DATA """
+    responses = db._sort_files(query)
+    return responses
+
+@tool
+def get_worker_reports(worker_name: str):
     """ Function to retrieve the current daily information from DB"""
     query = """ SELECT * FROM WORKER_DATA """
     responses = db._sort_files(query)

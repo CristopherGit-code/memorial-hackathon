@@ -41,13 +41,15 @@ class Superintendent_Agent:
         self.get_schema()
         self.main_llm = HelperOpenAI().bind_output(self.output_schema)
 
-    def get_weather_response(self):
-        weather_response = self.agent.invoke({"messages": [{"role": "assistant", "content": "Get the current weather alerts in SF"}]})
+    def get_weather_response(self,prompt:str):
+        model_prompt = f"Given the user request: {prompt}, use your tools to solve the user query."
+        weather_response = self.agent.invoke({"messages": [{"role": "assistant", "content": model_prompt}]})
         logger.debug(weather_response)
         return weather_response
     
-    def get_daily_db_reports(self):
-        daily_response = self.agent.invoke({"messages": [{"role": "assistant", "content": "Get the current daily reports from the DB"}]})
+    def get_daily_db_reports(self,prompt:str):
+        model_prompt = f"Given the user request: {prompt}, use your tools to solve the user query."
+        daily_response = self.agent.invoke({"messages": [{"role": "assistant", "content": model_prompt}]})
         logger.debug(daily_response)
         return daily_response
 
@@ -56,8 +58,8 @@ class Superintendent_Agent:
             self.output_schema = json.load(f)
 
     async def generate_daily_report(self,query:str):
-        daily_response = self.get_daily_db_reports()
-        weather_response = self.get_weather_response()
+        daily_response = self.get_daily_db_reports("Get the current daily reports from the DB")
+        weather_response = self.get_weather_response("Get the current weather alerts in SF")
         prompt = f"Build a final daily report from a construction site to give the superintendent in charge of the duty. Use the worker information: {daily_response}, suppose you found some discrepancies across reports. Take into consideration weather conditions {weather_response}"
         response = await self.main_llm.ainvoke(prompt)
         return response
