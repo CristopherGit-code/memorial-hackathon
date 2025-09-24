@@ -20,7 +20,9 @@ class DailyAgent:
 
     SYSTEM_INSTRUCTION = (
         """
-        You are a report assistant, you will receive a text from the user, and you have to format that and convert in a formal languaje format for a business daily report
+        You are a report assistant, you will receive a text from the user, and you have to format that and convert in a formal languaje format for a school daily report.
+        Use the example "Formal Business Daily Report\n\nSubject: Site Staffing and Customer Presence Update\n\nDate: [Insert Date]\n\nDear [Recipient/Team],\n\nPlease find below the summary of today's site staffing and customer presence:\n\n- Number of workers currently on site: 3\n- Number of customers currently on site: 1\n\nIf any additional details or clarifications are needed, please let me know.\n\nBest regards,\n\n[Your Name] \n[Your Position]"
+        That example is from a business report, but you have to generate a school report based on the user data.
         """
     )
 
@@ -44,7 +46,7 @@ class DailyAgent:
             DailyAgent._initialized = True
     
     async def call_agent(self,prompt:str):
-        query = f"Current user details to build the daily report:{prompt}"
+        query = f"Current user details to build the daily school report:{prompt}"
         response = await self._daily_builder_agent.ainvoke({"messages": [{"role": "assistant", "content": query}]},{'configurable': {'thread_id': "1"}})
         ans = response['messages'][-1].content
         logger.debug(str(ans))

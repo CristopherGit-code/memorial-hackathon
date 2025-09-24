@@ -10,6 +10,8 @@ import requests
 import oci
 from oci.config import DEFAULT_LOCATION, DEFAULT_PROFILE
 
+SANDBOX_PROFILE = "SANDBOX"
+
 class OciOpenAI(OpenAI):
     """
     A custom OpenAI client implementation for Oracle Cloud Infrastructure (OCI) Generative AI service.
@@ -121,7 +123,7 @@ class OCISessionAuth(HttpxOCIAuth):
     Attributes:
         signer (oci.auth.signers.SecurityTokenSigner): OCI signer using session token
     """
-    def __init__(self, config_file=DEFAULT_LOCATION, profile_name=DEFAULT_PROFILE):
+    def __init__(self, config_file=DEFAULT_LOCATION, profile_name=SANDBOX_PROFILE):
         config = oci.config.from_file(config_file, profile_name)
         token = self._load_token(config)
         private_key = self._load_private_key(config)
@@ -168,7 +170,7 @@ class OCIUserPrincipleAuth(HttpxOCIAuth):
     Attributes:
         signer (oci.signer.Signer): OCI signer configured with API key credentials
     """
-    def __init__(self, config_file=DEFAULT_LOCATION, profile_name=DEFAULT_PROFILE):
+    def __init__(self, config_file=DEFAULT_LOCATION, profile_name=SANDBOX_PROFILE):
         config = oci.config.from_file(config_file, profile_name)
         oci.config.validate_config(config)
 
@@ -281,8 +283,8 @@ class LLM_Open_Client:
 
     def build_llm_client(self):
         llm = OciOpenAILangGraphClient(
-            profile="API-USER",
-            compartment_id=os.environ.get("COMPARTIMENT"),
+            profile="SANDBOX",
+            compartment_id=os.environ.get("SANDBOX_COMPARTIMENT"),
             model_name="openai.gpt-4.1",
             service_endpoint=os.environ.get("ENDPOINT")
         )

@@ -1,0 +1,12 @@
+oci_client:
+  configProfile: "SANDBOX"
+  compartiment:  ${COMPARTIMENT}
+  endpoint:  ${ENDPOINT}
+  config_path:  ${CONFIG_PATH}
+
+database:
+  walletPath: ${CONFIG_DIR}
+  username: ${USER}
+  DB_password: ${DB_PASSWORD}
+  dsn: ${DB_DSN}
+  walletPass: ${WALLET_PASSWORD}

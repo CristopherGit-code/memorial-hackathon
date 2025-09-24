@@ -73,7 +73,7 @@ async def send_audio(client):
 
 def get_realtime_parameters(customizations, compartment_id):
     realtime_speech_parameters: RealtimeParameters = RealtimeParameters()
-    realtime_speech_parameters.language_code = "en-US"
+    realtime_speech_parameters.language_code = "fr-FR"
     realtime_speech_parameters.model_domain = RealtimeParameters.MODEL_DOMAIN_GENERIC
     realtime_speech_parameters.model_type = "ORACLE"
     realtime_speech_parameters.partial_silence_threshold_in_ms = 0

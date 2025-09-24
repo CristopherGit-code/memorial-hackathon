@@ -1,0 +1,22 @@
+[project]
+name = "super-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dotenv>=0.9.9",
+    "envyaml>=1.10.211231",
+    "fastapi>=0.116.2",
+    "httpx>=0.28.1",
+    "langchain>=0.3.27",
+    "langchain-openai>=0.3.33",
+    "langgraph>=0.6.7",
+    "oci>=2.160.0",
+    "oci-ai-speech-realtime>=2.2.0",
+    "openai>=1.107.2",
+    "oracledb>=3.3.0",
+    "pyaudio>=0.2.14",
+    "python-box>=7.3.2",
+    "uvicorn>=0.35.0",
+]

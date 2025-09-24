@@ -16,6 +16,8 @@ import {
   RealtimeParametersPunctuationEnum,
 } from "@oracle/oci-ai-speech-realtime-web";
 
+import Report from "./components/report";
+
 function App() {
   // Initialize the OCI Realtime Speech Web SDK
   const realtimeWebSocket = React.useRef<AIServiceSpeechRealtimeApi>();
@@ -36,7 +38,7 @@ function App() {
   const [connectionTime, setConnectionTime] = React.useState(0);
   const [authTime, setAuthTime] = React.useState(0);
 
-  const [dailyReport, setDailyReport] = React.useState("Waiting for speech...");
+  const [dailyReport, setDailyReport] = React.useState("{}");
 
   /* CUSTOMER DEFINED API CALL
    *
@@ -94,14 +96,14 @@ function App() {
 
   const get_dailyReport = async () => {
     let chain_data = ""
-    try{
+    try {
       const res = await fetch(`http://localhost:8001/get-response?query=${encodeURIComponent(finalResult)}`);
       chain_data = await res.json();
       console.log(chain_data)
       const agent_response = JSON.stringify(chain_data)
       setDailyReport(agent_response)
-    } catch (error){
-      console.error("Error in response",error)
+    } catch (error) {
+      console.error("Error in response", error)
     }
   }
 
@@ -135,9 +137,10 @@ function App() {
     // Read more - https://docs.oracle.com/en-us/iaas/api/#/en/speech/20220101/datatypes/RealtimeParameters
     const realtimeClientParameters: RealtimeParameters = {
       customizations: [],
+      // languageCode: "fr-FR",
       languageCode: "en-US",
       modelDomain: RealtimeParametersModelDomainEnum.GENERIC,
-      modelType: "ORACLE",
+      modelType: "WHISPER",
       stabilizePartialResults: RealtimeParametersStabilizePartialResultsEnum.NONE,
       partialSilenceThresholdInMs: 0,
       finalSilenceThresholdInMs: 1000,
@@ -244,25 +247,39 @@ function App() {
   return (
     <div className="App">
       <div>
-        <h1>Voice - Text Daily reports</h1>
+        <h1>AI sample School reports</h1>
         <h4>Web SDK client OCI speech example</h4>
-        <span>
+        <span style={{
+          display: "flex",
+          gap: '0.5rem'
+        }}>
           {/* Start and stop the session */}
           <button
             onClick={() => {
               return buttonState ? stopSession() : startSession();
+            }}
+            style={{
+              padding: '0.5rem',
+              background: '#2563eb',
+              color: '#e5e7eb',
+              borderRadius: '5px',
+              border: '1px #2563eb'
             }}>
             {buttonState ? "Stop Session" : "Start session"}
           </button>
-
-          {/* Request the service to send the final result */}
-          <button onClick={requestFinalResult}>{"Request final result"}</button>
 
           {/* Clear the screen and stop the session */}
           <button
             onClick={() => {
               buttonState && stopSession();
               reset();
+            }}
+            style={{
+              padding: '0.5rem',
+              background: '#2563eb',
+              color: '#e5e7eb',
+              borderRadius: '5px',
+              border: '1px #2563eb'
             }}>
             {"Clear screen"}
           </button>
@@ -274,72 +291,58 @@ function App() {
        * in a successful Realtime Speech connection */}
       {startTime > 0 && (
         <>
-          <h6>
-            <pre>Start time - {new Date(startTime).toLocaleString()}</pre>
-            {tokenTime > 0 && (
-              <pre>
-                Token received - {new Date(tokenTime).toLocaleString()} (+ {tokenTime - startTime} ms)
-              </pre>
-            )}
-            {connectionTime > 0 && (
-              <pre>
-                Websocket connected - {new Date(connectionTime).toLocaleString()} (+ {connectionTime - tokenTime} ms)
-              </pre>
-            )}
-            {authTime > 0 && (
-              <pre>
-                Realtime authenticated - {new Date(authTime).toLocaleString()} (+ {authTime - connectionTime} ms)
-              </pre>
-            )}
-          </h6>
+          <div style={{
+            display: "flex",
+            gap: '0.5rem'
+          }}>
+            <h6>
+              <pre style={{color:'#e5e7eb'}}>Start time - {new Date(startTime).toLocaleString()}</pre>
+              {tokenTime > 0 && (
+                <pre style={{color:'#e5e7eb'}}>
+                  Token received - {new Date(tokenTime).toLocaleString()} (+ {tokenTime - startTime} ms)
+                </pre>
+              )}
+              {connectionTime > 0 && (
+                <pre style={{color:'#e5e7eb'}}>
+                  Websocket connected - {new Date(connectionTime).toLocaleString()} (+ {connectionTime - tokenTime} ms)
+                </pre>
+              )}
+              {authTime > 0 && (
+                <pre style={{color:'#e5e7eb'}}>
+                  Realtime authenticated - {new Date(authTime).toLocaleString()} (+ {authTime - connectionTime} ms)
+                </pre>
+              )}
+            </h6>
+          </div>
         </>
-      )}
+      )
+      }
 
       {/* Display the errors */}
-      {errors?.length > 0 && (
-        <>
-          <h4>Errors</h4>
-          <pre>{errors}</pre>
-        </>
-      )}
-
-      {/* Display the token details as returned from
-       * the customer's server via the /authenticate GET call
-       * which in turn are returned by OCI Speech Service's
-       * `createRealtimeSessionToken` API */}
-      {/* {tokenDetails && (
-        <>
-          <h4>Token Details</h4>
-          <pre>{tokenDetails}</pre>
-        </>
-      )} */}
-
-      {/* Display the transcriptions returned by the service.
-       * Partial transcriptions are italicized where as
-       * finalized transcriptions are in regular font.
-       */}
-      {resultStream.length > 0 && (
-        <>
-          <h4>Transcriptions</h4>
-          <pre style={{ textWrap: "pretty" }}>
-            {finalResult + (finalResult.length > 0 ? " " : "")}
-            <em>{partialResult}</em>
-          </pre>
-        </>
-      )}
-
-      {/* Display raw messages coming from the websocket connection */}
-      {/* {resultStream.length > 0 && (
-        <>
-          <h4>Websocket Messages</h4>
-          <pre>{JSON.stringify(resultStream, undefined, 4)}</pre>
-        </>
-      )} */}
+      {
+        errors?.length > 0 && (
+          <>
+            <h4>Errors</h4>
+            <pre style={{color:'#e5e7eb'}}>{errors}</pre>
+          </>
+        )
+      }
+      {
+        resultStream.length > 0 && (
+          <>
+            <h4>Transcriptions from STT OCI services</h4>
+            <h5 style={{ textWrap: "pretty", color:'#e5e7eb' }}>
+              {finalResult + (finalResult.length > 0 ? " " : "")}
+              <em>{partialResult}</em>
+            </h5>
+          </>
+        )
+      }
       <>
-        <h4>Daily report generated</h4>
-        <p>{dailyReport}</p>
+        <h4>School student data generated using OCI model</h4>
+        <Report result={dailyReport}></Report>
       </>
-    </div>
+    </div >
   );
 }
 

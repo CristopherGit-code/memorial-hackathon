@@ -42,7 +42,7 @@ const port = 8448;
 app.use(cors());
 
 // The OCID of the compartment that will be used for authentication and authorization
-const compartmentId = "ocid1.compartment.oc1..";
+const compartmentId = "ocid1.compartment.oc1..aaaaaaaaboqoghc43bbqvei5y4pmnzia36wuh7fpcxn6fia7pfyelyg4rj7a";
 
 // Set the region where you want to use the services
 const region = "us-phoenix-1"; // e.g. "us-phoenix-1";
@@ -63,7 +63,7 @@ const region = "us-phoenix-1"; // e.g. "us-phoenix-1";
 async function getRealtimeToken() {
   // Use the AuthDetailsProvider suited for your use case.
   // Read more at - https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_authentication_methods.htm
-  const provider: common.ConfigFileAuthenticationDetailsProvider = new common.ConfigFileAuthenticationDetailsProvider("~/.oci/config", "DEFAULT");
+  const provider: common.ConfigFileAuthenticationDetailsProvider = new common.ConfigFileAuthenticationDetailsProvider("~/.oci/config", "SANDBOX");
 
   provider.setRegion(region);
 
