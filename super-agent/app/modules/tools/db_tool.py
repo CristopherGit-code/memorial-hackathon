@@ -1,5 +1,3 @@
-from typing import Any
-import httpx
 from langchain_core.tools import tool
 from app.modules.db.db import DataBase
 from app.util.config.config import Settings

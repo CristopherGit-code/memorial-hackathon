@@ -1,0 +1,106 @@
+{
+    "component": "construction_report",
+    "props": {
+        "date": "2025-09-17",
+        "project": "Sunrise Residential Complex",
+        "subcontractor": "Multiple (Cris, Anirban, Ramtin, Dhwani, Silin, Tobi)",
+        "work_performed": [
+            "Foundation inspected, no cracks observed",
+            "Concrete poured for second slab (timing to be reviewed)",
+            "Formwork dismantled after curing",
+            "Window installation on first floor",
+            "Basement electrical wiring started",
+            "Ground floor HVAC duct installation started",
+            "Lighting fixtures installed in main hall",
+            "Scaffolding adjusted for upper levels",
+            "Elevator shaft framework completed (second floor)",
+            "Painting of internal walls (delayed by rain)",
+            "Rooftop waterproofing membranes installed",
+            "Temporary walkways reconfigured",
+            "Safety equipment inspection",
+            "Morning safety briefing and protocol review",
+            "Cranes inspected and cleared",
+            "Fire alarm system tested (fully functional)",
+            "Site perimeter fencing inspected and minor repairs"
+        ],
+        "manpower": [
+            {
+                "role": "Concrete Crew",
+                "count": 15
+            },
+            {
+                "role": "Masons",
+                "count": 10
+            },
+            {
+                "role": "Electricians",
+                "count": 8
+            },
+            {
+                "role": "Painters",
+                "count": 6
+            },
+            {
+                "role": "HVAC Technicians",
+                "count": 4
+            },
+            {
+                "role": "Window Installers",
+                "count": 3
+            },
+            {
+                "role": "Site Supervisors / Inspectors",
+                "count": 5
+            }
+        ],
+        "equipment_used": [
+            "Cranes",
+            "Concrete Mixer/Pump",
+            "Elevator Hoist",
+            "Scaffolding",
+            "Power Tools (drills, saws)"
+        ],
+        "materials_delivered": [
+            {
+                "material": "Steel beams",
+                "quantity": "5 tons (late delivery)"
+            },
+            {
+                "material": "Bricks",
+                "quantity": "8,000 units (delayed by traffic)"
+            },
+            {
+                "material": "Concrete",
+                "quantity": "2 trucks (some placement delayed)"
+            },
+            {
+                "material": "Waterproofing membranes",
+                "quantity": "500 m2"
+            }
+        ],
+        "delays_issues": [
+            "Rain caused stoppage of concrete pour and delays to finishing (painting) work",
+            "Concrete slab activity timing reports conflicted (needs review)",
+            "Traffic delayed brick delivery",
+            "Steel beams arrived late but were safely stored",
+            "Wet surfaces slowed finishing tasks"
+        ],
+        "notes": [
+            "All safety inspections and briefings completed without incident",
+            "Quality control checks (foundation, fire system, formwork) passed",
+            "Site access improved with temporary walkway adjustments",
+            "All received materials accounted for and stored securely",
+            "Further clarification needed on specific timing of concrete pour given conflicting reports"
+        ]
+    },
+    "discrepancies": [
+        {
+            "issue": "Conflicting reports regarding second slab concrete pour—one report claims completed, others state stopped by rain. Needs timeline review and pour logs.",
+            "importante": 5
+        },
+        {
+            "issue": "Painting delays consistently reported, but degree of impact and area affected needs documentation for quality control follow-up.",
+            "importante": 3
+        }
+    ]
+}

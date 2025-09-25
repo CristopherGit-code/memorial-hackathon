@@ -3,12 +3,12 @@
   "description": "Schema to generate metadata for a construction site daily report UI component",
   "type": "object",
   "properties": {
-    "component": {
+    "report": {
       "type": "string",
       "description": "'construction_report' should be the component type",
       "enum": ["construction_report"]
     },
-    "props": {
+    "details": {
       "type": "object",
       "properties": {
         "date": {
@@ -16,9 +16,9 @@
           "description": "Date of the report (e.g., '2025-09-17')",
           "format": "date"
         },
-        "project": {
+        "area": {
           "type": "string",
-          "description": "Name of the project under construction"
+          "description": "area ID provided for the report"
         },
         "subcontractor": {
           "type": "string",
@@ -95,7 +95,7 @@
       },
       "required": [
         "date",
-        "project",
+        "area",
         "subcontractor",
         "work_performed",
         "manpower",

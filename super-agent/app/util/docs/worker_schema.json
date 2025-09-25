@@ -1,0 +1,112 @@
+{
+  "title": "construction_site_report_schema",
+  "description": "Schema to generate metadata for a construction site daily report UI component",
+  "type": "object",
+  "properties": {
+    "report": {
+      "type": "string",
+      "description": "'construction_report' should be the component type",
+      "enum": ["construction_report"]
+    },
+    "details": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Date of the report (e.g., '2025-09-17')",
+          "format": "date"
+        },
+        "project": {
+          "type": "string",
+          "description": "Project ID provided for the report"
+        },
+        "subcontractor": {
+          "type": "string",
+          "description": "Name of the subcontractor submitting the report"
+        },
+        "work_performed": {
+          "type": "array",
+          "description": "List of work tasks completed on site",
+          "items": {
+            "type": "string",
+            "description": "Name or identificator of the task compleated in the site"
+          }
+        },
+        "manpower": {
+          "type": "array",
+          "description": "List of roles and counts of workers on site",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role of the worker (e.g., 'Mason')"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Number of workers with this role"
+              }
+            },
+            "required": ["role", "count"],
+            "additionalProperties": false
+          }
+        },
+        "equipment_used": {
+          "type": "array",
+          "description": "List of equipment used during the day",
+          "items": {
+            "type": "string"
+          }
+        },
+        "materials_delivered": {
+          "type": "array",
+          "description": "List of materials delivered with quantities",
+          "items": {
+            "type": "object",
+            "properties": {
+              "material": {
+                "type": "string",
+                "description": "Name of the material delivered"
+              },
+              "quantity": {
+                "type": "string",
+                "description": "Quantity and unit of measure (e.g., '1,200 blocks')"
+              }
+            },
+            "required": ["material", "quantity"],
+            "additionalProperties": false
+          }
+        },
+        "delays_issues": {
+          "type": "array",
+          "description": "List of delays or issues encountered on site",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Additional notes related to the day's work",
+          "items": {
+            "type": "string",
+            "description":"Exatra notes for the daily report"
+          }
+        }
+      },
+      "required": [
+        "date",
+        "project",
+        "subcontractor",
+        "work_performed",
+        "manpower",
+        "equipment_used",
+        "materials_delivered",
+        "delays_issues",
+        "notes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": ["report", "details"],
+  "additionalProperties": false
+}
