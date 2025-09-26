@@ -1,18 +1,12 @@
-const MS_ENDPOINT = "https://r619jhnt-8001.usw3.devtunnels.ms";
+const INSTANCE_ENDPOINT = "https://venus.aisandbox.ugbu.oraclepdemos.com/app1";
 
 export async function sendMessage(message: string) {
     try {
-        const url = new URL(`${MS_ENDPOINT}/get-super-daily`);
+        const url = new URL(`${INSTANCE_ENDPOINT}/get-super-daily`);
 
         url.searchParams.append("query", message); // pass message as query param
 
-        console.log(url.toString())
-
-        const response = await fetch(url.toString(),{
-          headers: {
-            "x-api-key": ""
-          }
-        })
+        const response = await fetch(url.toString())
 
         console.log(response)
 
