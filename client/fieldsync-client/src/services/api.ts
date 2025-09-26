@@ -1,22 +1,27 @@
-const NGROK_URL = "https://dania-nonoperating-differently.ngrok-free.dev";
+const MS_ENDPOINT = "https://r619jhnt-8001.usw3.devtunnels.ms";
 
 export async function sendMessage(message: string) {
     try {
-        const url = new URL(`${NGROK_URL}/get-daily`);
-        console.log(`${NGROK_URL}/get-daily`)
+        const url = new URL(`${MS_ENDPOINT}/get-super-daily`);
 
         url.searchParams.append("query", message); // pass message as query param
 
         console.log(url.toString())
 
-        const response = await fetch(url.toString())
+        const response = await fetch(url.toString(),{
+          headers: {
+            "x-api-key": ""
+          }
+        })
+
+        console.log(response)
 
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }
 
         const data = await response.json();
-        console.log(data)
+        console.log(data.result)
         return data; // expects { result: "..." }
     } catch (error: any) {
         console.error("Error sending message:", error);

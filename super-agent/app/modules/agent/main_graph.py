@@ -87,7 +87,7 @@ class ChainManager:
 
 async def main():
     chain = ChainManager()
-    response = await chain.call_main_graph("Get the daily for today")
+    response = await chain.call_worker_main_graph("Get the daily for today")
     print(response)
 
 if __name__ == "__main__":

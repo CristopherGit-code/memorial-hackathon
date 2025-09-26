@@ -13,7 +13,9 @@ const Agent: React.FC = () => {
     setLoading(true);
 
     const result = await sendMessage(input);
-    setMessages((prev) => [...prev.slice(0, -1), { user: input, bot: result.result || "Error" }]);
+    console.warn(result)
+    const result_text = JSON.stringify(result.result)
+    setMessages((prev) => [...prev.slice(0, -1), { user: input, bot: result_text || "Error" }]);
 
     setInput("");
     setLoading(false);
